@@ -1,0 +1,38 @@
+nQuake for Linux
+================
+To install nQuake, locate the installer tarball (nquakeXX_installer-linux.tar.gz
+where XX is a number) and extract it.
+
+
+$ tar xvzf nquake13b_installer-linux.tar.gz
+
+
+The version of the installer may vary (in this case 13b), so try typing nquake
+and then pressing tab to let the console auto-complete the filename if you are
+unsure.
+
+Once you have extracted the package, change directory to the folder that was
+created (same as the package but without .tar.gz), run the install script and
+follow the instructions. You can use tab to auto-complete the folder name here
+as well.
+
+
+$ cd nquake13b_installer-linux/
+$ ./install_nquake.sh
+
+
+After choosing what mirror to use for downloading, simply sit back and enjoy
+a sweet cup of coffee or a glass of orange juice while nQuake downloads and
+installs all the components needed to play QuakeWorld.
+
+After installation has completed, start QuakeWorld by changing directory to
+where you chose to install nQuake, and run ezquake-gl.glx.
+
+
+$ cd ~/nquake/
+$ ./ezquake-gl.glx
+
+
+Thank you for downloading nQuake
+-
+2008-06-06
