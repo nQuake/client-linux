@@ -1,11 +1,19 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v1.3b (for Linux)
+# nQuake Bash Installer Script v2.0 (for Linux)
 # by Empezar
 
+# Check if unzip is installed
+unzip=`which unzip`
+if [ "$unzip"  = "" ]
+then
+	echo "Unzip is not installed. Please install it and run the nQuake installation again."
+	exit
+fi
+
 echo
-echo Welcome to the nQuake installation
-echo ==================================
+echo Welcome to the nQuake v2.0 installation
+echo =======================================
 echo
 echo Press ENTER to use [default] option.
 echo
@@ -48,6 +56,7 @@ fi
 
 # Search for pak1.pak
 defaultsearchdir="~/"
+pak=""
 read -p "Do you want setup to search for pak1.pak? (y/n) [n]: " search
 if [ "$search" = "y" ]
 then
@@ -68,7 +77,7 @@ fi
 echo
 
 # Download nquake.ini
-wget -q -O nquake.ini http://nquake.sourceforge.net/nquake.ini
+wget --inet4-only -q -O nquake.ini http://nquake.sourceforge.net/nquake.ini
 if [ -s "nquake.ini" ]
 then
 	echo foo >> /dev/null
@@ -106,108 +115,38 @@ echo;echo
 
 # Download all the packages
 echo "=== Downloading ==="
-wget -O demos.zip $mirror/demos.zip
-if [ -s "demos.zip" ]
-then
-	if [ "$(du demos.zip | cut -f1)" \> "0" ]
-	then
-	        wget -O textures.zip $mirror/textures.zip
-	fi
-fi
-if [ -s "textures.zip" ]
-then
-	if [ "$(du textures.zip | cut -f1)" \> "0" ]
-	then
-		wget -O models.zip $mirror/models.zip
-	fi
-fi
-if [ -s "models.zip" ]
-then
-        if [ "$(du models.zip | cut -f1)" \> "0" ]
-        then
-                wget -O skins.zip $mirror/skins.zip
-        fi
-fi
-if [ -s "skins.zip" ]
-then
-        if [ "$(du skins.zip | cut -f1)" \> "0" ]
-        then
-                wget -O lits.zip $mirror/lits.zip
-        fi
-fi
-if [ -s "lits.zip" ]
-then
-        if [ "$(du lits.zip | cut -f1)" \> "0" ]
-        then
-                wget -O ezquake.zip $mirror/ezquake.zip
-        fi
-fi
-if [ -s "ezquake.zip" ]
-then
-	if [ "$(du ezquake.zip | cut -f1)" \> "0" ]
-	then
-		wget -O ezquake-linux.zip $mirror/ezquake-linux.zip
-	fi
-fi
-if [ -s "ezquake-linux.zip" ]
-then
-	if [ "$(du ezquake-linux.zip | cut -f1)" \> "0" ]
-	then
-		wget -O frogbot.zip $mirror/frogbot.zip
-	fi
-fi
-if [ -s "frogbot.zip" ]
-then
-	if [ "$(du frogbot.zip | cut -f1)" \> "0" ]
-	then
-		wget -O maps.zip $mirror/maps.zip
-	fi
-fi
-if [ -s "maps.zip" ]
-then
-	if [ "$(du maps.zip | cut -f1)" \> "0" ]
-	then
-		wget -O misc.zip $mirror/misc.zip
-	fi
-fi
-if [ -s "misc.zip" ]
-then
-	if [ "$(du misc.zip | cut -f1)" \> "0" ]
-	then
-		wget -O misc-linux.zip $mirror/misc-linux.zip
-	fi
-fi
-if [ -s "misc-linux.zip" ]
-then
-        if [ "$(du misc-linux.zip | cut -f1)" \> "0" ]
-        then
-                wget -O misc_gpl.zip $mirror/misc_gpl.zip
-        fi
-fi
-if [ -s "misc_gpl.zip" ]
-then
-        if [ "$(du misc_gpl.zip | cut -f1)" \> "0" ]
-        then
-                wget -O misc_gpl-linux.zip $mirror/misc_gpl-linux.zip
-        fi
-fi
-if [ -s "misc_gpl-linux.zip" ]
-then
-	if [ "$(du misc_gpl-linux.zip | cut -f1)" \> "0" ]
-	then
-		wget -O qsw106.zip $mirror/qsw106.zip
-	fi
-fi
-
-# Terminate installation if not all packages were downloaded
+wget --inet4-only -O qsw106.zip $mirror/qsw106.zip
 if [ -s "qsw106.zip" ]
 then
 	if [ "$(du qsw106.zip | cut -f1)" \> "0" ]
 	then
+	        wget --inet4-only -O gpl.zip $mirror/gpl.zip
+	fi
+fi
+if [ -s "gpl.zip" ]
+then
+	if [ "$(du gpl.zip | cut -f1)" \> "0" ]
+	then
+		wget --inet4-only -O non-gpl.zip $mirror/non-gpl.zip
+	fi
+fi
+if [ -s "non-gpl.zip" ]
+then
+        if [ "$(du non-gpl.zip | cut -f1)" \> "0" ]
+        then
+                wget --inet4-only -O linux.zip $mirror/linux.zip
+        fi
+fi
+
+# Terminate installation if not all packages were downloaded
+if [ -s "linux.zip" ]
+then
+	if [ "$(du linux.zip | cut -f1)" \> "0" ]
+	then
 		echo foo >> /dev/null
 	else
 		echo "Error: Some distribution files failed to download. Better luck next time. Exiting."
-		rm -rf $directory/demos.zip $directory/textures.zip $directory/models.zip $directory/skins.zip $directory/lits.zip $directory/ezquake.zip $directory/ezquake-linux.zip $directory/frogbot.zip $directory/maps.zip $directory/misc.zip $directory/misc-linux.zip $directory/misc_gpl.zip $directory/misc_gpl-linux.zip $directory/qsw106.zip $directory/nquake.ini
+		rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/nquake.ini
 		if [ "$created" = "1" ]
 		then
 			cd
@@ -218,7 +157,7 @@ then
 	fi
 else
 	echo "Error: Some distribution files failed to download. Better luck next time. Exiting."
-	rm -rf $directory/demos.zip $directory/textures.zip $directory/models.zip $directory/skins.zip $directory/lits.zip $directory/ezquake.zip $directory/ezquake-linux.zip $directory/frogbot.zip $directory/maps.zip $directory/misc.zip $directory/misc-linux.zip $directory/misc_gpl.zip $directory/misc_gpl.zip $directory/qsw106.zip $directory/nquake.ini
+	rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/nquake.ini
 	if [ "$created" = "1" ]
 	then
 		cd
@@ -230,38 +169,19 @@ fi
 
 # Extract all the packages
 echo "=== Installing ==="
-echo -n "* Extracting demos.zip..."
-unzip -qqo demos.zip 2> /dev/null;echo "done"
-echo -n "* Extracting textures.zip..."
-unzip -qqo textures.zip 2> /dev/null;echo "done"
-echo -n "* Extracting models.zip..."
-unzip -qqo models.zip 2> /dev/null;echo "done"
-echo -n "* Extracting skins.zip..."
-unzip -qqo skins.zip 2> /dev/null;echo "done"
-echo -n "* Extracting lits.zip..."
-unzip -qqo lits.zip 2> /dev/null;echo "done"
-echo -n "* Extracting ezquake.zip..."
-unzip -qqo ezquake.zip 2> /dev/null;echo "done"
-echo -n "* Extracting ezquake-linux.zip..."
-unzip -qqo ezquake-linux.zip 2> /dev/null;echo "done"
-echo -n "* Extracting frogbot.zip..."
-unzip -qqo frogbot.zip 2> /dev/null;echo "done"
-echo -n "* Extracting maps.zip..."
-unzip -qqo maps.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc.zip..."
-unzip -qqo misc.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc-linux.zip..."
-unzip -qqo misc-linux.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc_gpl.zip..."
-unzip -qqo misc_gpl.zip 2> /dev/null;echo "done"
-echo -n "* Extracting misc_gpl-linux.zip..."
-unzip -qqo misc_gpl-linux.zip 2> /dev/null;echo "done"
-echo -n "* Extracting qsw106.zip..."
+echo -n "* Extracting Quake Shareware..."
 unzip -qqo qsw106.zip ID1/PAK0.PAK 2> /dev/null;echo "done"
+echo -n "* Extracting nQuake setup files (1 of 2)..."
+unzip -qqo gpl.zip 2> /dev/null;echo "done"
+echo -n "* Extracting nQuake setup files (2 of 2)..."
+unzip -qqo non-gpl.zip 2> /dev/null;echo "done"
+echo -n "* Extracting nQuake Linux files..."
+unzip -qqo linux.zip 2> /dev/null;echo "done"
 if [ "$pak" != "" ]
 then
 	echo -n "* Copying pak1.pak..."
 	cp $pak $directory/id1/pak1.pak 2> /dev/null;echo "done"
+	rm -rf $directory/id1/gpl-maps.pk3 $directory/id1/readme.txt
 fi
 echo
 
@@ -275,12 +195,12 @@ echo "done"
 
 # Remove the Windows specific files
 echo -n "* Removing Windows specific binaries..."
-rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe $directory/qw/qizmo $directory/qw/qwdtools/qwdtools.exe
+rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe
 echo "done"
 
 # Remove distribution files
 echo -n "* Removing distribution files..."
-rm -rf $directory/demos.zip $directory/textures.zip $directory/models.zip $directory/skins.zip $directory/lits.zip $directory/ezquake.zip $directory/ezquake-linux.zip $directory/frogbot.zip $directory/maps.zip $directory/misc.zip $directory/misc-linux.zip $directory/misc_gpl.zip $directory/misc_gpl-linux.zip $directory/qsw106.zip $directory/nquake.ini
+rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/nquake.ini
 echo "done"
 
 # Make Linux related updates
@@ -290,10 +210,10 @@ echo >> $directory/ezquake/configs/config.cfg
 cat $directory/ezquake/configs/config-linux.cfg >> $directory/ezquake/configs/config.cfg
 rm -rf $directory/ezquake/configs/config-linux.cfg
 echo "done"
-        
+
 # Convert DOS files to UNIX
 echo -n "* Converting DOS files to UNIX..."
-for file in $directory/readme.txt $directory/ezquake/cfg/* $directory/ezquake/configs/* $directory/ezquake/keymaps/* $directory/ezquake/sb/* $directory/ezquake/gnu.txt $directory/qw/autoexec.cfg $directory/qw/pak.lst $directory/qw/qwdtools/qwdtools.ini
+for file in $directory/readme.txt $directory/id1/readme.txt $directory/ezquake/cfg/* $directory/ezquake/configs/* $directory/ezquake/sb/* $directory/ezquake/gnu.txt
 do
 	if [ -f "$file" ]
 	then
@@ -310,7 +230,11 @@ find $directory -type d -exec chmod -f 755 {} \;
 chmod -f +x $directory/ezquake-gl.glx 2> /dev/null
 chmod -f +x $directory/ezquake.svga 2> /dev/null
 chmod -f +x $directory/ezquake/sb/update_sources 2> /dev/null
-chmod -f +x $directory/qw/qwdtools/qwdtools 2> /dev/null
 echo "done"
+
+# Create an install_dir in ~/.nquake detailing where nQuake is installed
+mkdir -p ~/.nquake
+rm -rf ~/.nquake/install_dir
+echo $directory >> ~/.nquake/install_dir
 
 echo;echo "Installation complete. Happy gibbing!"
