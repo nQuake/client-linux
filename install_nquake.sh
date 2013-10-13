@@ -198,9 +198,20 @@ echo -n "* Removing Windows specific binaries..."
 rm -rf $directory/ezquake-gl.exe $directory/ezquake/sb/wget.exe
 echo "done"
 
+# Set architecture
+echo -n "* Setting architecture..."
+binary=`uname -i`
+if [ "$binary" == "x86_64" ]
+then
+	unzip -qqo $directory/x64.zip 2> /dev/null
+else
+        unzip -qqo $directory/x86.zip 2> /dev/null
+fi
+echo "done"
+
 # Remove distribution files
 echo -n "* Removing distribution files..."
-rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/nquake.ini
+rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/nquake.ini $directory/x86.zip $directory/x64.zip
 echo "done"
 
 # Make Linux related updates
@@ -229,6 +240,7 @@ find $directory -type f -exec chmod -f 644 {} \;
 find $directory -type d -exec chmod -f 755 {} \;
 chmod -f +x $directory/ezquake-gl.glx 2> /dev/null
 chmod -f +x $directory/ezquake.svga 2> /dev/null
+chmod -f +x $directory/ezquake.x11 2> /dev/null
 chmod -f +x $directory/ezquake/sb/update_sources 2> /dev/null
 echo "done"
 
@@ -237,4 +249,7 @@ mkdir -p ~/.nquake
 rm -rf ~/.nquake/install_dir
 echo $directory >> ~/.nquake/install_dir
 
+echo;echo "Note:"
+echo "For optimal mouse support, run /evdevlist and set your /in_evdevice to the right device number (ingame). Ensure that /in_mouse is 3 and then do /in_restart (also ingame). Note that you need to \"sudo chmod 644 /dev/input/event??\" for this to work."
+echo;echo "The default resolution is set for a widescreen display. If you have a non-widescreen display, a black bar will appear at the top of your screen. To fix this, go to Options -> System and change your resolution accordingly."
 echo;echo "Installation complete. Happy gibbing!"

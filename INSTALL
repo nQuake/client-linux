@@ -4,12 +4,8 @@ To install nQuake, locate the installer tarball (nquakeXX_installer-linux.tar.gz
 where XX is a number) and extract it.
 
 
-$ tar xvzf nquake13b_installer-linux.tar.gz
+$ tar xvzf nquake21_installer-linux.tar.gz
 
-
-The version of the installer may vary (in this case 20), so try typing nquake
-and then pressing tab to let the console auto-complete the filename if you are
-unsure.
 
 Once you have extracted the package, change directory to the folder that was
 created (same as the package but without .tar.gz), run the install script and
@@ -17,7 +13,7 @@ follow the instructions. You can use tab to auto-complete the folder name here
 as well.
 
 
-$ cd nquake20_installer-linux/
+$ cd nquake21_installer-linux/
 $ ./install_nquake.sh
 
 
@@ -32,9 +28,10 @@ where you chose to install nQuake, and run ezquake-gl.glx.
 $ cd ~/nquake/
 $ ./ezquake-gl.glx
 
+
 If you are interested in playing the full Quake game (singleplayer), you need
 to buy Quake. From the Quake installation, copy pak1.pak to ~/nquake/id1/.
 
 Thank you for downloading nQuake
 -
-2012-08-18
+2012-08-22
