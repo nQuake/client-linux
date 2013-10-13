@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# nQuake Bash Installer Script v2.0 (for Linux)
+# nQuake Bash Installer Script v2.2 (for Linux)
 # by Empezar
 
 # Check if unzip is installed
@@ -12,7 +12,7 @@ then
 fi
 
 echo
-echo Welcome to the nQuake v2.0 installation
+echo Welcome to the nQuake v2.2 installation
 echo =======================================
 echo
 echo Press ENTER to use [default] option.
@@ -212,14 +212,6 @@ echo "done"
 # Remove distribution files
 echo -n "* Removing distribution files..."
 rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/nquake.ini $directory/x86.zip $directory/x64.zip
-echo "done"
-
-# Make Linux related updates
-echo -n "* Making Linux related updates..."
-# Add some more suitable variables to config.cfg
-echo >> $directory/ezquake/configs/config.cfg
-cat $directory/ezquake/configs/config-linux.cfg >> $directory/ezquake/configs/config.cfg
-rm -rf $directory/ezquake/configs/config-linux.cfg
 echo "done"
 
 # Convert DOS files to UNIX
