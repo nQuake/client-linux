@@ -4,7 +4,7 @@ To install nQuake, locate the installer tarball (nquakeXX_installer-linux.tar.gz
 where XX is a number) and extract it.
 
 
-$ tar xvzf nquake21_installer-linux.tar.gz
+$ tar xvzf nquake23_installer-linux.tar.gz
 
 
 Once you have extracted the package, change directory to the folder that was
@@ -13,7 +13,7 @@ follow the instructions. You can use tab to auto-complete the folder name here
 as well.
 
 
-$ cd nquake21_installer-linux/
+$ cd nquake23_installer-linux/
 $ ./install_nquake.sh
 
 
@@ -34,4 +34,4 @@ to buy Quake. From the Quake installation, copy pak1.pak to ~/nquake/id1/.
 
 Thank you for downloading nQuake
 -
-2012-08-22
+2014-03-17
