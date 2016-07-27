@@ -296,6 +296,7 @@ echo
 echo "=== Installation Complete ==="
 echo "nQuake was successfully installed. Happy gibbing!"
 echo
+echo "Note: untar the correct binary for your distribution"
 echo "Please note:"
 echo "For optimal mouse support, run /evdevlist and set your /in_evdevice to the right device number (ingame). Ensure that /in_mouse is 3 and then do /in_restart (also ingame). Note that you need to \"sudo chmod 644 /dev/input/event??\" for this to work."
 echo
