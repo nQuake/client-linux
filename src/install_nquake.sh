@@ -300,5 +300,4 @@ echo "Happy gibbing!"
 echo
 echo "Please note:"
 echo "* For optimal mouse support, run /evdevlist and set your /in_evdevice to the right device number (ingame). Ensure that /in_mouse is 3 and then do /in_restart (also ingame). Note that you need to \"sudo chmod 644 /dev/input/event??\" for this to work."
-echo "* The default resolution is set for a widescreen display. If you have a non-widescreen display, a black bar will appear at the top of your screen. To fix this, go to Options -> System and change your resolution accordingly."
 echo
