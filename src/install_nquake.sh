@@ -237,7 +237,7 @@ if [ "$pak" != "" ]
 then
 	echo -n "* Copying pak1.pak..."
 	cp $pak $directory/id1/pak1.pak 2> /dev/null
-	rm -rf $directory/id1/gpl-maps.pk3 $directory/id1/readme.txt
+	rm -rf $directory/id1/gpl_maps.pk3 $directory/id1/readme.txt
 	echo "done"
 fi
 echo
