@@ -130,7 +130,7 @@ echo "=== Download Location ==="
 echo "From what mirror would you like to download nQuake?"
 grep "[0-9]\{1,2\}=\".*" nquake.ini | cut -d "\"" -f2 | nl
 read -p "Enter mirror number [random]: " mirror
-mirror=$(grep "^$mirror=[fhtp]\{3,4\}://[^ ]*$" nquake.ini | cut -d "=" -f2)
+mirror=$(grep "^$mirror=\(http\|https\|ftp\)://[^ ]*$" nquake.ini | cut -d "=" -f2)
 if [ "$mirror" = "" ]
 then
 	echo
@@ -140,7 +140,7 @@ then
 	do
 		number=$RANDOM
 		let "number %= $RANGE"
-		mirror=$(grep "^$number=[fhtp]\{3,4\}://[^ ]*$" nquake.ini | cut -d "=" -f2)
+		mirror=$(grep "^$number=\(http\|https\|ftp\)://[^ ]*$" nquake.ini | cut -d "=" -f2)
 		mirrorname=$(grep "^$number=\".*" nquake.ini | cut -d "\"" -f2)
 	done
 	echo "$mirrorname"
