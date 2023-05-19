@@ -161,7 +161,7 @@ then
 fi
 if [ "$error" = false ]
 then
-	distdl $mirror linux.zip
+	distdl https://github.com/QW-Group/ezquake-source/releases/latest/download ezQuake-x86_64.AppImage
 fi
 if [ "$error" = false ]
 then
@@ -190,7 +190,7 @@ if [ "$error" = true ]
 then
 	echo "=== Installation Failed ==="
 	echo "Some distribution files failed to download. Better luck next time. Exiting."
-	rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/addon-clanarena.zip $directory/addon-fortress.zip $directory/addon-textures.zip $directory/nquake.ini
+	rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/ezQuake-x86_64.AppImage $directory/addon-clanarena.zip $directory/addon-fortress.zip $directory/addon-textures.zip $directory/nquake.ini
 	if [ "$created" = true ]
 	then
 		cd
@@ -211,9 +211,6 @@ unzip -qqo gpl.zip 2> /dev/null
 echo "done"
 echo -n "* Extracting nQuake setup files (2 of 2)..."
 unzip -qqo non-gpl.zip 2> /dev/null
-echo "done"
-echo -n "* Extracting nQuake Linux files..."
-unzip -qqo linux.zip 2> /dev/null
 echo "done"
 if [ "$clanarena" = "y" ]
 then
@@ -282,9 +279,7 @@ echo "done"
 echo -n "* Setting permissions..."
 find $directory -type f -exec chmod -f 644 {} \;
 find $directory -type d -exec chmod -f 755 {} \;
-chmod -f +x $directory/ezquake-gl.glx 2> /dev/null
-chmod -f +x $directory/ezquake.svga 2> /dev/null
-chmod -f +x $directory/ezquake.x11 2> /dev/null
+chmod -f +x $directory/*.AppImage 2> /dev/null
 echo "done"
 
 # Create an install_dir in ~/.nquake detailing where nQuake is installed
