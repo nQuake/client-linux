@@ -289,7 +289,7 @@ echo $directory >> ~/.nquake/install_dir
 
 echo
 echo "=== Installation Complete ==="
-echo "nQuake was successfully installed. To start playing, please untar the correct binary for your distribution."
+echo "nQuake was successfully installed. To start playing, run the ezQuake-x86_64.AppImage executable in your nquake directory."
 echo
 echo "Happy gibbing!"
 echo
