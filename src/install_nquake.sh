@@ -161,7 +161,7 @@ then
 fi
 if [ "$error" = false ]
 then
-	distdl https://github.com/QW-Group/ezquake-source/releases/latest/download ezQuake-x86_64.AppImage
+	distdl https://github.com/QW-Group/ezquake-source/releases/latest/download ezQuake-linux-x86_64.zip
 fi
 if [ "$error" = false ]
 then
@@ -190,7 +190,7 @@ if [ "$error" = true ]
 then
 	echo "=== Installation Failed ==="
 	echo "Some distribution files failed to download. Better luck next time. Exiting."
-	rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/ezQuake-x86_64.AppImage $directory/addon-clanarena.zip $directory/addon-fortress.zip $directory/addon-textures.zip $directory/nquake.ini
+	rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/ezQuake-linux-x86_64.zip $directory/addon-clanarena.zip $directory/addon-fortress.zip $directory/addon-textures.zip $directory/nquake.ini
 	if [ "$created" = true ]
 	then
 		cd
@@ -211,6 +211,9 @@ unzip -qqo gpl.zip 2> /dev/null
 echo "done"
 echo -n "* Extracting nQuake setup files (2 of 2)..."
 unzip -qqo non-gpl.zip 2> /dev/null
+echo "done"
+echo -n "* Extracting nQuake Linux files..."
+unzip -qqo ezQuake-linux-x86_64.zip 2> /dev/null
 echo "done"
 if [ "$clanarena" = "y" ]
 then
@@ -262,7 +265,7 @@ fi
 echo "done"
 # Remove distribution files
 echo -n "* Removing distribution files..."
-rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/addon-clanarena.zip $directory/addon-fortress.zip $directory/addon-textures.zip $directory/nquake.ini $directory/x86.zip $directory/x64.zip
+rm -rf $directory/qsw106.zip $directory/gpl.zip $directory/non-gpl.zip $directory/linux.zip $directory/addon-clanarena.zip $directory/addon-fortress.zip $directory/addon-textures.zip $directory/nquake.ini $directory/ezQuake-linux-x86_64.zip $directory/x86.zip $directory/x64.zip
 echo "done"
 # Convert DOS files to UNIX
 echo -n "* Converting DOS files to UNIX..."
